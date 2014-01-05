@@ -11,7 +11,8 @@ $(function() {
   var handlers = navbar.data ? navbar.data('events') : jQuery._data(navbar[0], 'events');
 
   if (!handlers || -1 !== $.inArray(onNavbarClick, handlers.click)) {
-      $(document).on("click", ".pagination.alpha a", onNavbarClick);
+      //$(document).on("click", ".pagination.alpha > a", onNavbarClick);
+      $('.pagination.alpha > ul > li > a').click(onNavbarClick);
   }
 
   function onNavbarClick(e) {
@@ -34,6 +35,7 @@ $(function() {
       $.get(url, function(result) {
           $(".pagination").html($(".pagination", result).html());
           $("#pagination_table").html($("#pagination_table", result).html());
+          liveSortable();
       });
       history.pushState(null, document.title, url);
   }
